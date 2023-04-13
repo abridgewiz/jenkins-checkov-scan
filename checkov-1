@@ -1,20 +1,6 @@
 pipeline {
   agent {
-    any {
-      yaml '''
-apiVersion: v1
-kind: Pod
-metadata:
-  name: checkov
-spec:
-  containers:
-  - name: checkov
-    image: bridgecrew/checkov:2.3.165
-    command:
-    - cat
-    tty: true
-'''   
-    }
+    docker {bridgecrew/checkov:2.3.165}
   }
   stages {
     stage('verify version') {
